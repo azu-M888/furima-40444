@@ -9,21 +9,21 @@
 | nickname           | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
-| last-name_kana     | string | null: false |
-| first-name_kana    | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
 | birth_date         | date   | null: false |
 
 
 ### Association
 has_many :items
-has_many :comments
+has_many :orders
 
 
 
 ## items テーブル
 
 | Column                        | Type        | Options     |
-| ----------------------------- | ------      | ----------- |
+| ----------------------------- | ----------  | ----------- |
 | user                          | references  | null: false, foreign_key: true |
 | item_name                     | string      | null: false |
 | item_info                     | text        | null: false |
@@ -36,30 +36,31 @@ has_many :comments
 
 
 ### Association
-belong_to user
-belong_to orders
+belong_to :user
+has_one :orders
 
 
 
 ## orders テーブル
 
 | Column  | Type        | Options     |
-| --------| ------      | ----------- |
+| --------| ----------- | ----------- |
 | user    | references  | null: false, foreign_key: true |
 | item    | references  | null: false, foreign_key: true |
 
 
 
 ### Association
-belong_to users
-belong_to address
-has_one items
+belong_to :user
+has_one :address
+belong_to :item
 
 
 ## address テーブル
 
 | Column         | Type        | Options     |
-| -------       -| ------      | ----------- |
+| ------------   | ----------- | ----------- |
+| order          | references  | null: false, foreign_key: true |
 | postal_code    | string      | null: false |
 | prefecture_id  | integer     | null: false |
 | city           | string      | null: false |
@@ -68,5 +69,4 @@ has_one items
 | phone_number   | string      | null: false |
 
 ### Association
-belong_to user
-has_one orders
+belongs_to :order
