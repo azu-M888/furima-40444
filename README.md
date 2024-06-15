@@ -37,7 +37,7 @@ has_many :orders
 
 ### Association
 belong_to :user
-has_one :orders
+has_one :order
 
 
 
@@ -56,7 +56,7 @@ has_one :address
 belong_to :item
 
 
-## address テーブル
+## addresses テーブル
 
 | Column         | Type        | Options     |
 | ------------   | ----------- | ----------- |
@@ -64,7 +64,7 @@ belong_to :item
 | postal_code    | string      | null: false |
 | prefecture_id  | integer     | null: false |
 | city           | string      | null: false |
-| addresses      | string      | null: false |
+| address        | string      | null: false |
 | building       | string      |             |
 | phone_number   | string      | null: false |
 
