@@ -15,8 +15,8 @@
 
 
 ### Association
-has_many :items
-has_many :orders
+- has_many :items
+- has_many :orders
 
 
 
@@ -36,8 +36,8 @@ has_many :orders
 
 
 ### Association
-belongs_to :user
-has_one :order
+- belongs_to :user
+- has_one :order
 
 
 
@@ -51,9 +51,9 @@ has_one :order
 
 
 ### Association
-belongs_to :user
-has_one :address
-belongs_to :item
+- belongs_to :user
+- has_one :address
+- belongs_to :item
 
 
 ## addresses テーブル
@@ -69,4 +69,4 @@ belongs_to :item
 | phone_number   | string      | null: false |
 
 ### Association
-belongs_to :order
+- belongs_to :order
