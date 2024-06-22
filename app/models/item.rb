@@ -9,6 +9,6 @@ class Item < ApplicationRecord
   validates :item_scheduled_delivery_id, presence: true          
   validates :item_price, presence: true  
 
-  - belongs_to :user
-  - has_one :order,dependent: :destroy
+  belongs_to :user
+  has_one :order,dependent: :destroy
 end
