@@ -64,32 +64,52 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it "first_name、last_name、first_name_kana、last_name_kanaが空では登録できない" do
+      it "first_nameが空では登録できない" do
         user = FactoryBot.build(:user)
         user.first_name = ''
-        user.last_name = ''
-        user.first_name_kana = ''
-        user.last_name_kana = ''
         user.valid?
         expect(user.errors.full_messages).to include ("First name can't be blank")
+      end
+      it "last_name_kanaが空では登録できない" do
+        user = FactoryBot.build(:user)
+        user.last_name = ''
+        user.valid?
         expect(user.errors.full_messages).to include ("Last name can't be blank")
+      end
+      it "first_name_kanaが空では登録できない" do
+        user = FactoryBot.build(:user)
+        user.first_name_kana = ''
+        user.valid?
         expect(user.errors.full_messages).to include ("First name kana can't be blank")
+      end
+      it "last_name_kanaが空では登録できない" do
+        user = FactoryBot.build(:user)
+        user.last_name_kana = ''
+        user.valid?
         expect(user.errors.full_messages).to include ("Last name kana can't be blank")
       end
-      it "first_name、last_nameは全角以外では登録できない" do
+      it "first_nameは全角以外では登録できない" do
         user = FactoryBot.build(:user)
         user.first_name = '121356'
-        user.last_name = '121356'
         user.valid?
         expect(user.errors.full_messages).to include ("First name は全角で入力してください。")
+      end
+      it "last_nameは全角以外では登録できない" do
+        user = FactoryBot.build(:user)
+        user.last_name = '121356'
+        user.valid?
         expect(user.errors.full_messages).to include ("Last name は全角で入力してください。")
       end
-      it "first_name_kana、last_name_kanaは全角カナ以外では登録できない" do
+      it "first_name_kanaは全角カナ以外では登録できない" do
         user = FactoryBot.build(:user)
         user.first_name_kana = '12国国56'
-        user.last_name_kana = '12国国56'
         user.valid?
         expect(user.errors.full_messages).to include ("First name kana は全角カナで入力してください。")
+      end
+      it "last_name_kanaは全角カナ以外では登録できない" do
+        user = FactoryBot.build(:user)
+        user.last_name_kana = '12国国56'
+        user.valid?
         expect(user.errors.full_messages).to include ("Last name kana は全角カナで入力してください。")
       end
       it "birth_dateが空では登録できない" do
