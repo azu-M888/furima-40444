@@ -6,5 +6,5 @@ class Address < ApplicationRecord
   validates :address, presence: true
   validates :phone_number, presence: true
 
-  - belongs_to :order
+  belongs_to :order
 end
