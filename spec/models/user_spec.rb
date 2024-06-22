@@ -5,7 +5,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-    
       it 'nicknameが空では登録できない' do
         user = FactoryBot.build(:user) 
         user.nickname = '' 
@@ -79,11 +78,11 @@ RSpec.describe User, type: :model do
       end
       it "first_name、last_nameは全角以外では登録できない" do
         user = FactoryBot.build(:user)
-        user.first_name_kana = '121356'
-        user.last_name_kana = '121356'
+        user.first_name = '121356'
+        user.last_name = '121356'
         user.valid?
-        expect(user.errors.full_messages).to include ("First name kana は全角で入力してください。")
-        expect(user.errors.full_messages).to include ("Last name kana は全角で入力してください。")
+        expect(user.errors.full_messages).to include ("First name は全角で入力してください。")
+        expect(user.errors.full_messages).to include ("Last name は全角で入力してください。")
       end
       it "first_name_kana、last_name_kanaは全角カナ以外では登録できない" do
         user = FactoryBot.build(:user)
