@@ -10,12 +10,11 @@ class User < ApplicationRecord
     VALID_ZENKAKU_REGEX = /\A[ぁ-んァ-ン一-龥々]+\z/
     validates :last_name,presence: true, format: { with: VALID_ZENKAKU_REGEX, message: 'は全角で入力してください。' }
     validates :first_name,presence: true,format: { with: VALID_ZENKAKU_REGEX, message: 'は全角で入力してください。' }
-    VALID_ZENKAKU_REGEX = /\A[ァ-ン]+\z/
+    VALID_ZENKAKU_REGEX = /\A[ぁ-んァ-ン一-龥々]+\z/
     validates :first_name_kana,presence: true, format: { with: VALID_ZENKAKU_REGEX, message: 'は全角カナで入力してください。' }
     validates :last_name_kana,presence: true, format: { with: VALID_ZENKAKU_REGEX, message: 'は全角カナで入力してください。'  }
 
   validates :nickname, presence: true 
-  validates :email, presence: true 
   validates :birth_date, presence: true
 
   # has_many :items, dependent: :destroy
