@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
 CONSTANTS = {
   password_regex: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze,
-  zenkaku_regex: /\A[ぁ-んァ-ン一-龥々]+\z/,
-  zenkaku_kana_regex: /\A[ァ-ン]+\z/,
+  zenkaku_regex: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/,
+  zenkaku_kana_regex: /\A[ァ-ヶー]+\z/,
 }
 
 with_options presence: true do
