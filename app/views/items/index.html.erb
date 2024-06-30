@@ -127,6 +127,35 @@
       新規投稿商品
     </div>
   </div>
+  <% if @items.present? %>
+     <ul class='item-lists'>
+      <% @items.each.reverse_each do |item| %>
+        <%= link_to "#" do %>
+          <div class='item-img-content'>
+            <%= image_tag item.image, class: "item-img" %>
+              <%# 商品が売れていればsold outを表示しましょう %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+              <%# //商品が売れていればsold outを表示しましょう %>
+          </div>
+          <div class='item-info'>
+            <h3 class='item-name'>
+              <%= item.item_name %>
+            </h3>
+            <div class='item-price'>
+              <span><%= item.item_price %>円<br><%= item.item_shipping_fee_status.name %></span>
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'>0</span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      </ui>
+    
+  <% else %>
     <div class='item-contents'>
       <ul class='item-lists'>
         <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
@@ -181,6 +210,7 @@
         <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       </ul>
     </div>
+  <% end %>
   <%# /商品一覧 %>
 </div>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
