@@ -1,5 +1,5 @@
-# class Order < ApplicationRecord
+class Order < ApplicationRecord
 #   belongs_to :user
 #   has_one :address
 #   belongs_to :item  
-# end
+end
