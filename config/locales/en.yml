@@ -31,3 +31,30 @@
 
 en:
   hello: "Hello world"
+
+ja:
+  activerecord:
+    errors:
+      models:
+        item:
+          attributes:
+            item_name:
+              blank: "can't be blank"
+            item_info:
+              blank: "can't be blank"
+            item_category_id:
+              blank: "can't be blank"
+            item_sales_status_id:
+              blank: "can't be blank"
+            item_shipping_fee_status_id:
+              blank: " can't be blank"
+            item_scheduled_delivery_id:
+              blank: "can't be blank"
+            item_price:
+              blank: "can't be blank"
+              greater_than_or_equal_to: "is 300 set to a value greater than or equal to"
+              less_than_or_equal_to: 'is 9,999,999 set the following values'
+              not_a_number: "is not semicolon (punct)"
+            image:
+              blank: "can't be blank"
+              
