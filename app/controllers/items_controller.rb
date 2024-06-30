@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    # @items = Item.all
   end
 
   def create

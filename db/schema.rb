@@ -43,7 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_29_072240) do
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
-    t.text "image"
     t.bigint "user_id", null: false
     t.string "item_name", null: false
     t.text "item_info", null: false
