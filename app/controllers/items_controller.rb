@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
     @items = Item.all.order("created_at DESC")
   end
 
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -28,6 +29,41 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @item = Item.find(params[:id])
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to action: :show
+    else
+      @item_category = ItemCategory.all
+      @item_sales_status = ItemSalesStatus.all
+      @prefecture = Prefecture.all
+      @item_scheduled_delivery = ItemScheduledDelivery.all
+      @item_shipping_fee_status = ItemShippingFeeStatus.all
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      @item_category = ItemCategory.all
+      @item_sales_status = ItemSalesStatus.all
+      @prefecture = Prefecture.all
+      @item_scheduled_delivery = ItemScheduledDelivery.all
+      @item_shipping_fee_status = ItemShippingFeeStatus.all
+      render :edit 
+      Rails.logger.debug @item.errors.full_messages
+    end
+    
+  end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
 
   private
 
