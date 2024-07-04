@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :show
+      redirect_to action: :index
     else
       @item_category = ItemCategory.all
       @item_sales_status = ItemSalesStatus.all
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
       @prefecture = Prefecture.all
       @item_scheduled_delivery = ItemScheduledDelivery.all
       @item_shipping_fee_status = ItemShippingFeeStatus.all
-      render :edit 
+      render :edit, status: :unprocessable_entity
       Rails.logger.debug @item.errors.full_messages
     end
     
