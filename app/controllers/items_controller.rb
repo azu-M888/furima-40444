@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_login, only: [:new]
+  before_action :item_find, only: [:edit, :update, :show]
 
   def new
     @item = Item.new
@@ -31,7 +32,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     unless user_signed_in? && current_user.id == @item.user_id
       redirect_to action: :index
     else
@@ -44,8 +44,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def update
-    @item = Item.find(params[:id])
+  def update   
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -61,7 +60,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
 
@@ -76,5 +74,10 @@ class ItemsController < ApplicationController
       redirect_to user_session_path
     end
   end
+
+  def item_find
+    @item = Item.find(params[:id])
+  end
+
   
 end
