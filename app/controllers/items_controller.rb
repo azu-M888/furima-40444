@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_login, only: [:new]
+  before_action :item_find, only: [:edit, :update, :show]
 
   def new
     @item = Item.new
@@ -15,6 +16,7 @@ class ItemsController < ApplicationController
     @items = Item.all.order("created_at DESC")
   end
 
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -29,6 +31,38 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to action: :index
+    else
+      @item_category = ItemCategory.all
+      @item_sales_status = ItemSalesStatus.all
+      @prefecture = Prefecture.all
+      @item_scheduled_delivery = ItemScheduledDelivery.all
+      @item_shipping_fee_status = ItemShippingFeeStatus.all
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def update   
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      @item_category = ItemCategory.all
+      @item_sales_status = ItemSalesStatus.all
+      @prefecture = Prefecture.all
+      @item_scheduled_delivery = ItemScheduledDelivery.all
+      @item_shipping_fee_status = ItemShippingFeeStatus.all
+      render :edit, status: :unprocessable_entity
+      Rails.logger.debug @item.errors.full_messages
+    end
+    
+  end
+
+  def show
+  end
+
+
   private
 
   def item_params
@@ -40,5 +74,10 @@ class ItemsController < ApplicationController
       redirect_to user_session_path
     end
   end
+
+  def item_find
+    @item = Item.find(params[:id])
+  end
+
   
 end
