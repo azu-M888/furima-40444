@@ -17,7 +17,7 @@
         ¥ <%= @item.item_price %>
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= @item.item_shipping_fee_status.name %>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.item_category.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
