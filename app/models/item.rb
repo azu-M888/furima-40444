@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one_attached :image
-  # has_one :order,dependent: :destroy
+  has_one :order,dependent: :destroy
   belongs_to_active_hash :item_category, class_name: 'ItemCategory'
   belongs_to_active_hash :item_sales_status, class_name: 'ItemSalesStatus'
   belongs_to_active_hash :item_scheduled_delivery, class_name: 'ItemScheduledDelivery'
