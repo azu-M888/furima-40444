@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new
     @prefecture = Prefecture.all
-    if @order = @item.order.present?
+    if @order = @item.order.present? ||current_user.id == @item.user_id
       redirect_to root_path
     end
 
