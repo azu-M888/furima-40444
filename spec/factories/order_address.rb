@@ -6,7 +6,5 @@ FactoryBot.define do
     address         {"国国"}
     phone_number    {'0002223333'}
     token {"tok_abcdefghijk00000000000000000"}
-    user_id {3}
-    item_id {3}
   end
 end

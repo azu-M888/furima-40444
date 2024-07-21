@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: :index
   before_action :move_to_login, only: [:new, :destroy]
   before_action :item_find, only: [:edit, :update, :show, :destroy]
 
@@ -32,7 +33,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
+    unless current_user.id == @item.user_id
       redirect_to action: :index
     else
       if @order = @item.order
