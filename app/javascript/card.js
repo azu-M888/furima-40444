@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
 const pay = () => {
   let publicKey;
   if (typeof gon !== 'undefined') {
@@ -35,3 +36,5 @@ const pay = () => {
 
 window.addEventListener("turbo:load", pay);
 window.addEventListener("turbo:render", pay);
+
+});

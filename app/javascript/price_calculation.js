@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('item-price').addEventListener('input', () => {
     const inputPrice = document.getElementById('item-price').value;
 
