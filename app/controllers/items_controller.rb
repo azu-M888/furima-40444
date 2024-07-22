@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index,:show]
   before_action :move_to_login, only: [:new, :destroy]
   before_action :item_find, only: [:edit, :update, :show, :destroy]
 
@@ -32,15 +33,19 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
+    unless current_user.id == @item.user_id
       redirect_to action: :index
     else
-      @item_category = ItemCategory.all
-      @item_sales_status = ItemSalesStatus.all
-      @prefecture = Prefecture.all
-      @item_scheduled_delivery = ItemScheduledDelivery.all
-      @item_shipping_fee_status = ItemShippingFeeStatus.all
-      render :edit, status: :unprocessable_entity
+      if @order = @item.order
+        redirect_to action: :index
+      else
+        @item_category = ItemCategory.all
+        @item_sales_status = ItemSalesStatus.all
+        @prefecture = Prefecture.all
+        @item_scheduled_delivery = ItemScheduledDelivery.all
+        @item_shipping_fee_status = ItemShippingFeeStatus.all
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
@@ -59,6 +64,11 @@ class ItemsController < ApplicationController
   end
 
   def show
+    if @order = @item.order
+      unless current_user.id == @order.user_id || current_user.id == @item.user_id
+        redirect_to action: :index
+      end
+    end
   end
 
   def destroy
@@ -80,6 +90,11 @@ class ItemsController < ApplicationController
   def move_to_login
     unless user_signed_in?
       redirect_to user_session_path
+    end
+  end
+  def move_to_index
+    unless user_signed_in?
+      redirect_to root_path
     end
   end
 
