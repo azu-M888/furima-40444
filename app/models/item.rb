@@ -1,6 +1,4 @@
 class Item < ApplicationRecord
-  include ActiveModel::Model
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one_attached :image
